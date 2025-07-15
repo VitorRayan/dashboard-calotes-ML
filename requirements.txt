@@ -4,3 +4,5 @@ plotly
 kaggle
 numpy
 scikit-learn
+matplotlib
+seaborn
