@@ -54,6 +54,14 @@ def load_data():
     file_name = 'UCI_Credit_Card.csv'
     zip_file = 'default-of-credit-card-clients-dataset.zip'
 
+    kaggle_json = {
+    "username": st.secrets["rayanrr"],
+    "key": st.secrets["84f4876ed4e9051dcc893447512a59d7"]
+}
+os.makedirs(os.path.join(os.path.expanduser("~"), ".kaggle"), exist_ok=True)
+with open(os.path.join(os.path.expanduser("~"), ".kaggle", "kaggle.json"), "w") as f:
+    json.dump(kaggle_json, f)
+    
     api = KaggleApi()
     api.authenticate()
 
