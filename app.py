@@ -54,14 +54,6 @@ def load_data():
     file_name = 'UCI_Credit_Card.csv'
     zip_file = 'default-of-credit-card-clients-dataset.zip'
 
-    kaggle_json = {
-    "username": st.secrets["rayanrr"],
-    "key": st.secrets["84f4876ed4e9051dcc893447512a59d7"]
-}
-os.makedirs(os.path.join(os.path.expanduser("~"), ".kaggle"), exist_ok=True)
-with open(os.path.join(os.path.expanduser("~"), ".kaggle", "kaggle.json"), "w") as f:
-    json.dump(kaggle_json, f)
-    
     api = KaggleApi()
     api.authenticate()
 
@@ -78,9 +70,12 @@ with open(os.path.join(os.path.expanduser("~"), ".kaggle", "kaggle.json"), "w") 
     df['Estado_Civil'] = df['MARRIAGE'].map({1: 'Casado(a)', 2: 'Solteiro(a)', 3: 'Outro'}).fillna('Outro')
     df['Calote'] = df['default.payment.next.month'].map({0: 0, 1: 1})  # para ML: 0 e 1
     df['Faixa_Idade'] = pd.cut(df['AGE'], bins=range(20, 81, 10), right=False)
-    return df
 
+    return df  # <-- aqui está correto
+
+# Fora da função:
 df = load_data()
+
 
 # Sidebar filtros
 st.sidebar.header("🎛️ Filtros")
